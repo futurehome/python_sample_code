@@ -111,6 +111,7 @@ for n in Ns_1d:
     fftconv_time2 += [timeit(fftconvolve, shape=(n, ))]
     sig_conv_time2 += [timeit(sig_convolve, shape=(n, ))]
     lconv_time2 += [timeit(lfilter, shape=(n, ), lfilter=True)]
+
 fig = plt.figure(1, figsize=(16, 5.5))
 plt.subplot(1, 2, 1)
 plt.loglog(ntaps_list, conv1d_time, 'k-p', label='ndimage.convolve1d')
