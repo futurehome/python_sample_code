@@ -1,4 +1,4 @@
-from numpy import *
+from numpy import * 
 from math import erfc
 import matplotlib.pyplot as plt
 
