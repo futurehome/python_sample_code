@@ -1,5 +1,6 @@
 from scipy.signal import butter, lfilter
 
+
 def butter_bandpass(lowcut, highcut, fs, order=5):
     nyq = 0.5 * fs
     low = lowcut / nyq
@@ -32,8 +33,8 @@ def run():
         w, h = freqz(b, a, worN=2000)
         plt.plot((fs * 0.5 / np.pi) * w, abs(h), label="order = %d" % order)
 
-    plt.plot([0, 0.5 * fs], [np.sqrt(0.5), np.sqrt(0.5)],
-             '--', label='sqrt(0.5)')
+    plt.plot(
+        [0, 0.5 * fs], [np.sqrt(0.5), np.sqrt(0.5)], '--', label='sqrt(0.5)')
     plt.xlabel('Frequency (Hz)')
     plt.ylabel('Gain')
     plt.grid(True)
@@ -62,3 +63,6 @@ def run():
     plt.legend(loc='upper left')
 
     plt.show()
+
+if __name__ == '__main__':
+    run()
