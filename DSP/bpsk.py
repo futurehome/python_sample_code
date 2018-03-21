@@ -1,6 +1,7 @@
-from numpy import * 
 from math import erfc
+
 import matplotlib.pyplot as plt
+from numpy import arange, ceil, empty, random, shape, sign, sqrt, where
 
 SNR_MIN = 0
 SNR_MAX = 9
