@@ -91,13 +91,13 @@ else:
 
 
 def timeit(fn, shape, lfilter=False, n_x=2e4, repeats=3):
-    #x = np.random.rand(int(n_x))
-    #y = np.random.rand(*shape)
-    #args = [x, y] if not lfilter else [x, x, y]
+    x = np.random.rand(int(n_x))
+    y = np.random.rand(*shape)
+    args = [x, y] if not lfilter else [x, x, y]
     times = []
     for _ in range(int(repeats)):
         start = time.time()
-        #c = fn(*args)
+        c = fn(*args)
         times += [time.time() - start]
     return min(times)
 
