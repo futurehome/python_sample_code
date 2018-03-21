@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 # Create the m by n data to be filtered.
 m = 1
-n = 2 ** 18
+n = 2**18
 x = np.random.random(size=(m, n))
 
 conv_time = []
@@ -23,7 +23,7 @@ diff_list = []
 diff2_list = []
 diff3_list = []
 
-ntaps_list = 2 ** np.arange(2, 14)
+ntaps_list = 2**np.arange(2, 14)
 
 for ntaps in ntaps_list:
     # Create a FIR filter.
@@ -48,7 +48,7 @@ for ntaps in ntaps_list:
     tstart = time.time()
     # convolve1d doesn't have a 'valid' mode, so we expliclity slice out
     # the valid part of the result.
-    conv1d_result = convolve1d(x, b)[:, (len(b)-1)//2 : -(len(b)//2)]
+    conv1d_result = convolve1d(x, b)[:, (len(b) - 1) // 2:-(len(b) // 2)]
     conv1d_time.append(time.time() - tstart)
 
     # --- lfilter ---
@@ -66,28 +66,29 @@ for ntaps in ntaps_list:
     diff3_list.append(diff3)
 
 # Verify that np.convolve and lfilter gave the same results.
-print("Did np.convolve and lfilter produce the same results?",)
+print("Did np.convolve and lfilter produce the same results?", )
 check = all(diff < 1e-13 for diff in diff3_list)
 if check:
-    print( "Yes.")
+    print("Yes.")
 else:
-    print( "No!  Something went wrong.")
+    print("No!  Something went wrong.")
 
 # Verify that fftconvolve and lfilter gave the same results.
-print( "Did fftconvolve and lfilter produce the same results?")
+print("Did fftconvolve and lfilter produce the same results?")
 check = all(diff < 1e-13 for diff in diff_list)
 if check:
-    print( "Yes.")
+    print("Yes.")
 else:
-    print( "No!  Something went wrong.")
+    print("No!  Something went wrong.")
 
 # Verify that convolve1d and lfilter gave the same results.
-print( "Did convolve1d and lfilter produce the same results?",)
+print("Did convolve1d and lfilter produce the same results?", )
 check = all(diff2 < 1e-13 for diff2 in diff2_list)
 if check:
-    print( "Yes.")
+    print("Yes.")
 else:
-    print( "No!  Something went wrong.")
+    print("No!  Something went wrong.")
+
 
 def timeit(fn, shape, lfilter=False, n_x=2e4, repeats=3):
     #x = np.random.rand(int(n_x))
@@ -100,21 +101,24 @@ def timeit(fn, shape, lfilter=False, n_x=2e4, repeats=3):
         times += [time.time() - start]
     return min(times)
 
+
 npconv_time2, conv_time2, conv1d_time2 = [], [], []
 fftconv_time2, sig_conv_time2, lconv_time2 = [], [], []
-Ns_1d = 2*np.logspace(0, 4, num=11, dtype=int)
+Ns_1d = 2 * np.logspace(0, 4, num=11, dtype=int)
 for n in Ns_1d:
-    npconv_time2 += [timeit(np_convolve, shape=(n,))]
-    conv1d_time2 += [timeit(convolve1d, shape=(n,))]
-    fftconv_time2 += [timeit(fftconvolve, shape=(n,))]
-    sig_conv_time2 += [timeit(sig_convolve, shape=(n,))]
-    lconv_time2 += [timeit(lfilter, shape=(n,), lfilter=True)]
+    npconv_time2 += [timeit(np_convolve, shape=(n, ))]
+    conv1d_time2 += [timeit(convolve1d, shape=(n, ))]
+    fftconv_time2 += [timeit(fftconvolve, shape=(n, ))]
+    sig_conv_time2 += [timeit(sig_convolve, shape=(n, ))]
+    lconv_time2 += [timeit(lfilter, shape=(n, ), lfilter=True)]
 fig = plt.figure(1, figsize=(16, 5.5))
 plt.subplot(1, 2, 1)
 plt.loglog(ntaps_list, conv1d_time, 'k-p', label='ndimage.convolve1d')
 plt.loglog(ntaps_list, lfilt_time, 'c-o', label='signal.lfilter')
-plt.loglog(ntaps_list, fftconv_time, 'm-*', markersize=8, label='signal.fftconvolve')
-plt.loglog(ntaps_list[:len(conv_time)], conv_time, 'g-d', label='signal.convolve')
+plt.loglog(
+    ntaps_list, fftconv_time, 'm-*', markersize=8, label='signal.fftconvolve')
+plt.loglog(
+    ntaps_list[:len(conv_time)], conv_time, 'g-d', label='signal.convolve')
 plt.loglog(ntaps_list, npconv_time, 'b-s', label='numpy.convolve')
 plt.legend(loc='best', numpoints=1)
 plt.grid(True)
@@ -125,7 +129,8 @@ plt.title('Multidimensional timing')
 plt.subplot(1, 2, 2)
 plt.loglog(Ns_1d, conv1d_time2, 'k-p', label='ndimage.convolve1d')
 plt.loglog(Ns_1d, lconv_time2, 'c-o', label='signal.lfilter')
-plt.loglog(Ns_1d, fftconv_time2, 'm-*', markersize=8, label='signal.fftconvolve')
+plt.loglog(
+    Ns_1d, fftconv_time2, 'm-*', markersize=8, label='signal.fftconvolve')
 plt.loglog(Ns_1d, sig_conv_time2, 'g-d', label='signal.convolve')
 plt.loglog(Ns_1d, npconv_time2, 'b-s', label='np.convolve')
 plt.grid()
