@@ -97,7 +97,7 @@ def timeit(fn, shape, lfilter=False, n_x=2e4, repeats=3):
     times = []
     for _ in range(int(repeats)):
         start = time.time()
-        c = fn(*args)
+        _ = fn(*args)
         times += [time.time() - start]
     return min(times)
 
