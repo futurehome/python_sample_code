@@ -1,5 +1,7 @@
 import scipy as sp
 from scipy import signal
+import pylab as pl
+
 
 
 def gauss_kern(size, sizey=None):
@@ -32,3 +34,5 @@ pl.imshow(Z)
 Z2 = blur_image(Z, 3)
 pl.figure()
 pl.imshow(Z2)
+
+pl.show()

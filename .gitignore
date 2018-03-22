@@ -3,3 +3,10 @@ __pycache__/plural6.cpython-36.pyc
 __pycache__/to_roman.cpython-36.pyc
 out.log
 feed.xml
+sweep_poly.png
+chirp_hyperbolic.png
+chirp_linear.png
+chirp_logarithmic.png
+chirp_quadratic.png
+chirp_quadratic_v0false.png
+plot.png
