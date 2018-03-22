@@ -26,5 +26,9 @@ def blur_image(im, n, ny=None):
 
 X, Y = sp.mgrid[-70:70, -70:70]
 Z = sp.cos((X**2 + Y**2) / 200.) + sp.random.normal(size=X.shape)
+pl.figure()
+pl.imshow(Z)
 
-blur_image(Z, 3)
+Z2 = blur_image(Z, 3)
+pl.figure()
+pl.imshow(Z2)
