@@ -26,13 +26,14 @@ def blur_image(im, n, ny=None):
     return improc
 
 
-X, Y = sp.mgrid[-70:70, -70:70]
-Z = sp.cos((X**2 + Y**2) / 200.) + sp.random.normal(size=X.shape)
-pl.figure()
-pl.imshow(Z)
-
-Z2 = blur_image(Z, 3)
-pl.figure()
-pl.imshow(Z2)
-
-pl.show()
+if __name__ == '__main__':
+    X, Y = sp.mgrid[-70:70, -70:70]
+    Z = sp.cos((X**2 + Y**2) / 200.) + sp.random.normal(size=X.shape)
+    pl.figure()
+    pl.imshow(Z)
+    
+    Z2 = blur_image(Z, 3)
+    pl.figure()
+    pl.imshow(Z2)
+    
+    pl.show()

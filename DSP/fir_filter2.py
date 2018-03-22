@@ -3,7 +3,6 @@ import numpy as np
 from scipy.signal import firwin, freqz, lfilter
 
 
-#def mfreqz(b, a=1, fig=1):
 def mfreqz(b, a=1):
     '''
     Plot frequency and phase response
