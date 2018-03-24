@@ -33,8 +33,8 @@ StopBandEdge = 214000       #Hz
 StopBandAttenu = 85.5       #dB
 
 #Frequency and phase response
-mfreqz(a, 1, SampleRate, PassBandStart, PassBandStop, PassBandRipple, 
-    PassBandEdge, StopBandEdge, StopBandAttenu)
+mfreqz(a, 1, SampleRate=192000, PassBandStop=142000, PassBandRipple=0.8, 
+    PassBandEdge=147000, StopBandEdge=214000, StopBandAttenu=85.5)
 #Impulse and step response
 impz(a)
 #plt.show()

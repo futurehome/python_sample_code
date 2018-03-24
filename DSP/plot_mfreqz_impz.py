@@ -5,41 +5,49 @@ from matplotlib.widgets import MultiCursor
 from scipy.signal import freqz, lfilter
 
 
-def mfreqz(b, a=1, SampleRate=np.pi/2, PassBandStart=0, PassBandStop=0, PassBandRipple=0, 
-    PassBandEdge=0, StopBandEdge=0, StopBandAttenu=0):
+def mfreqz(b, a=1, **kwargs):
     '''
     Plot frequency and phase response
+    Parameters in **kwargs: SampleRate=np.pi/2, PassBandStart=0, PassBandStop=0, PassBandRipple=0, 
+    PassBandEdge=0, StopBandEdge=0, StopBandAttenu=0
     '''
+    SampleRate = np.pi/2
+    for key in kwargs:
+        if key == 'SampleRate': 
+            SampleRate = kwargs[key] 
+
+
     w, h = freqz(b, a)
     w_hz = w * SampleRate * 2 / np.pi
     h_dB = 20 * np.log10(abs(h) / max(h))
     fig = plt.figure()
     ax1 = fig.add_subplot(211)
     ax1.plot(w_hz, h_dB)
-    #for p in [
-    #    patches.Rectangle(
-    #        (PassBandStart, -2*PassBandRipple),
-    #        (PassBandStop-PassBandStart),
-    #        2*PassBandRipple,
-    #        hatch='.',
-    #        fill=False,
-    #        color='r',
-    #        ls='--',
-    #        lw=1),
-    #]:
-    #    ax1.add_patch(p)
+    #
+    #Plot lines for dB=0 and dB=-3 cutoff
+    #
     ax1.axhline(y=0, ls='--', lw=0.5, color='r')
-    ax1.axhline(y=-2*PassBandRipple, ls='--', lw=0.5, color='r')
-    #ax1.annotate('Pass Band Ripple', xy=(0, -2*PassBandRipple-4), color='r')
     ax1.axhline(y=-3, ls='--', lw=0.5, color='r')
-    #ax1.hlines(0, 0, PassBandEdge, color='r', linestyle='--', linewidth=0.5)
-    #ax1.hlines(-2*PassBandRipple, 0, PassBandEdge, color='r', linestyle='--', linewidth=0.5)
-    ax1.axvline(PassBandStop, color='r', linestyle='--', lw=0.5)
-    ax1.axvline(PassBandEdge, color='r', linestyle='--', lw=0.5)
-    ax1.axvline(StopBandEdge, color='r', linestyle='--', lw=0.5)
-    ax1.axhline(-StopBandAttenu, color='r', linestyle='--', lw=0.5)
-    #plt.plot(w / max(w), h_dB)
-    #plt.ylim(-150, 205)
+    #
+    #Plot lines for different parameters
+    #
+    for key in kwargs:
+        if key == 'PassBandStart':
+            ax1.axvline(kwargs[key], color='r', ls='--', lw=0.5)
+        if key == 'PassBandStop':
+            ax1.axvline(kwargs[key], color='r', ls='--', lw=0.5)
+        if key == 'PassBandRipple':
+            ax1.axhline(y=-2*kwargs[key], color='r', ls='--', lw=0.5)
+            #ax1.annotate('Pass Band Ripple', xy=(0, -2*PassBandRipple-4), color='r')
+        if key == 'PassBandEdge':
+            ax1.axvline(kwargs[key], color='r', ls='--', lw=0.5)
+        if key == 'StopBandEdgeBandPass':
+            ax1.axvline(kwargs[key], color='r', ls='--', lw=0.5)
+        if key == 'StopBandEdge':
+            ax1.axvline(kwargs[key], color='r', ls='--', lw=0.5)
+        if key == 'StopBandAttenu':
+            ax1.axhline(-kwargs[key], color='r', ls='--', lw=0.5)
+    #ax1.annotate('Pass Band Ripple', xy=(0, -2*PassBandRipple-4), color='r')
     ax1.set_ylabel('Magnitude (db)')
     #ax1.set_xlabel(r'Normalized Frequency (x$\pi$rad/sample)')
     ax1.set_xlabel('Frequency (Hz)')
