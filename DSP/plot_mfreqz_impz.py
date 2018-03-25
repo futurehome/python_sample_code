@@ -61,6 +61,8 @@ def mfreqz(b, a=1, **kwargs):
     axzoomup.set_xlim(PassBandStop-50000, PassBandEdge+10000)
     axzoomup.set_ylim(-5, 1)
     axzoomup.plot(w_hz, h_dB)
+    axzoomup.axhline(y=0, ls='--', lw=0.5, color='r')
+    axzoomup.axhline(y=-3, ls='--', lw=0.5, color='r')
     for key in kwargs:
         if key == 'PassBandStart':
             axzoomup.axvline(kwargs[key], color='r', ls='--', lw=0.5)
