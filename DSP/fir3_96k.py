@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 from plot_mfreqz_impz import mfreqz, impz
+import numpy as np
 
 #a = (-86825,63854,702930,-198615,-3055544,-569238,10827251,18186235,10827251,-569238,-3055544,-198615,702930,63854,-86825)
 
@@ -17,24 +18,32 @@ from plot_mfreqz_impz import mfreqz, impz
 #PassBandStop = 360000       #Hz
 #PassBandRipple = 1.125        #dB
 
-#FIR2 192K
-a = (-90,-530,-820,1588,6825,3353,-20328,-34595,21687,114519,56390,-214540,-313747,
-179066,775592,288441,-1209774,-1479191,982591,3372163,965643,-5253883,
--6416788,4568767,21930026,30464097,21930026,4568767,-6416788,-5253883,
-965643,3372163,982591,-1479191,-1209774,288441,775592,179066,-313747,
--214540,56390,114519,21687,-34595,-20328,3353,6825,1588,-820,-530,-90)
-n = len(a)
-SampleRate = 192000         #Hz
-PassBandStart = 20          #Hz
-PassBandStop = 142000       #Hz
-PassBandRipple = 0.8        #dB
-PassBandEdge = 147000       #Hz
-StopBandEdge = 214000       #Hz
-StopBandAttenu = 85.5       #dB
+##FIR2 192K
+#a = np.array([-90,-530,-820,1588,6825,3353,-20328,-34595,21687,114519,56390,-214540,-313747,
+#179066,775592,288441,-1209774,-1479191,982591,3372163,965643,-5253883,
+#-6416788,4568767,21930026,30464097,21930026,4568767,-6416788,-5253883,
+#965643,3372163,982591,-1479191,-1209774,288441,775592,179066,-313747,
+#-214540,56390,114519,21687,-34595,-20328,3353,6825,1588,-820,-530,-90])/2**25
+##a[:] = [x / 2**25 for x in a]
+#
+#n = len(a)
+#SampleRate = 192000         #Hz
+#PassBandStart = 20          #Hz
+#PassBandStop = 142000       #Hz
+#PassBandRipple = 0.8        #dB
+#PassBandEdge = 147000       #Hz
+#StopBandEdge = 214000       #Hz
+#StopBandAttenu = 85.5       #dB
 
+
+a = (1, 1, 1, 1)
+zoom = 1
 #Frequency and phase response
-mfreqz(a, 1, SampleRate=192000, PassBandStop=142000, PassBandRipple=0.8, 
-    PassBandEdge=147000, StopBandEdge=214000, StopBandAttenu=85.5)
+#mfreqz(a, 1, 'zoom', SampleRate=192000, PassBandSto=142000, PassBandRipple=0.8, 
+#    PassBandEdge=147000, StopBandEdge=214000, StopBandAttenu=85.5)
+mfreqz(a)
+
+
 #Impulse and step response
 impz(a)
 #plt.show()
