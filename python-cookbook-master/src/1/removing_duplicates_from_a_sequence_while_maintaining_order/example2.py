@@ -11,6 +11,7 @@ def dedupe(items, key=None):
             seen.add(val)
 
 if __name__ == '__main__':
+    result =[]
     a = [ 
         {'x': 2, 'y': 3},
         {'x': 1, 'y': 4},
@@ -19,5 +20,7 @@ if __name__ == '__main__':
         {'x': 10, 'y': 15}
         ]
     print(a)
-    print(list(dedupe(a, key=lambda a: (a['x'],a['y']))))
+    print(list(dedupe(a, key=lambda b: (b['x'],b['y']))))
+    #result += dedupe(a, key=lambda b: (b['x'],b['y']))
+    #print(result)
 

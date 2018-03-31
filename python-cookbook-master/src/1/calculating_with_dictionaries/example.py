@@ -10,6 +10,11 @@ prices = {
    'FB': 10.75
 }
 
+'''
+The solution involving solves the problem by “inverting” the dictionary 
+into a zip() sequence of pairs. When performing comparisons on such tuples, 
+the (value, key) element is compared first, followed by the key value
+'''
 # Find min and max price
 min_price = min(zip(prices.values(), prices.keys()))
 max_price = max(zip(prices.values(), prices.keys()))

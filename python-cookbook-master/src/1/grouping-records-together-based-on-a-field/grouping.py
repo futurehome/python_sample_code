@@ -10,9 +10,12 @@ rows = [
 ]
 
 from itertools import groupby
+from operator import itemgetter
 
-rows.sort(key=lambda r: r['date'])
-for date, items in groupby(rows, key=lambda r: r['date']):
+#rows.sort(key=lambda r: r['date'])
+rows.sort(key=itemgetter('date'))
+#for date, items in groupby(rows, key=lambda r: r['date']):
+for date, items in groupby(rows, key=itemgetter('date')):
     print(date)
     for i in items:
         print('    ', i)

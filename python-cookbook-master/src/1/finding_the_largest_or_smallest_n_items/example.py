@@ -13,8 +13,12 @@ portfolio = [
    {'name': 'ACME', 'shares': 75, 'price': 115.65}
 ]
 
-cheap = heapq.nsmallest(3, portfolio, key=lambda s: s['price'])
-expensive = heapq.nlargest(3, portfolio, key=lambda s: s['price'])
+#cheap = heapq.nsmallest(3, portfolio, key=lambda s: s['price'])
+#expensive = heapq.nlargest(3, portfolio, key=lambda s: s['price'])
+
+from operator import itemgetter
+cheap = heapq.nsmallest(3, portfolio, key=itemgetter('price'))
+expensive = heapq.nlargest(3, portfolio, key=itemgetter('price'))
 
 print(cheap)
 print(expensive)
