@@ -1,4 +1,10 @@
 # example.py
+'''
+One possible use of a is as a replacement for a dictionary, which requires
+namedtuple more space to store. Thus, if you are building large data structures 
+involving dictionaries, use of a will be more efficient. However, be aware that 
+unlike a dictionary, namedtuple a is immutable.
+'''
 
 from collections import namedtuple
 

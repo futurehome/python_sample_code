@@ -2,6 +2,10 @@
 #
 # Some examples of using generators in arguments
 
+'''
+The generator solution transforms the data iteratively and is 
+therefore much more memory-efficient.
+'''
 import os
 files = os.listdir(os.path.expanduser('~'))
 if any(name.endswith('.py') for name in files):
@@ -21,4 +25,6 @@ portfolio = [
    {'name':'SCOX', 'shares': 65}
 ]
 min_shares = min(s['shares'] for s in portfolio)
+print(min_shares)
+min_shares = min(portfolio, key=lambda x:x['shares'])
 print(min_shares)
