@@ -8,7 +8,7 @@ goodbye
 '''
 
 # Launch a command with pipes
-p = subprocess.Popen(['wc'],
+p = subprocess.Popen(['cat'],
           stdout = subprocess.PIPE,
           stdin = subprocess.PIPE)
 

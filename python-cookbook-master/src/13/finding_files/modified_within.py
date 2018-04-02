@@ -16,8 +16,13 @@ def modified_within(top, seconds):
 
 if __name__ == '__main__':
     import sys
+    #os.path.basename(filename)
+    #os.path.dirname(filename)
+    #os.path.split(filename)
+    #os.path.join('/new/dir', os.path.basename(filename))
+    #os.path.expanduser('~/guido/programs/spam.py')
     if len(sys.argv) != 3:
-        print('Usage: {} dir seconds'.format(sys.argv[0]))
+        print('Usage: {} dir seconds'.format(os.path.basename(sys.argv[0])))
         raise SystemExit(1)
     
     modified_within(sys.argv[1], float(sys.argv[2]))
