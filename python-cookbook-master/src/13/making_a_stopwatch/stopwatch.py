@@ -39,12 +39,23 @@ if __name__ == '__main__':
             n -= 1
 
     t = Timer()
+    print(t.running)
     t.start()
+    print(t.running)
     countdown(1000000)
+    print(t.running)
     t.end()
+    print(t.running)
     print(t.elapsed)
 
     with t:
         countdown(1000000)
     print(t.elapsed)
 
+    with Timer() as t2:
+        countdown(1000000)
+    print(t2.elapsed)
+
+    import timeit
+
+    print(timeit.timeit('"-".join(str(n) for n in range(100))', number=10000))
