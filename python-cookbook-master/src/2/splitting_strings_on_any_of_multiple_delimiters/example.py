@@ -7,6 +7,8 @@ import re
 line = 'asdf fjdk; afed, fjek,asdf,      foo'
 
 # (a) Splitting on space, comma, and semicolon
+# The 'r' means the the following is a "raw string", ie. backslash characters
+# are treated literally instead of signifying special treatment
 parts = re.split(r'[;,\s]\s*', line)
 print(parts)
 
@@ -20,10 +22,9 @@ delimiters = fields[1::2]
 delimiters.append('')
 print('value =', values)
 print('delimiters =', delimiters)
-newline = ''.join(v+d for v,d in zip(values, delimiters))
+newline = ''.join(v + d for v, d in zip(values, delimiters))
 print('newline =', newline)
 
 # (d) Splitting using a non-capture group
 parts = re.split(r'(?:,|;|\s)\s*', line)
 print(parts)
-
