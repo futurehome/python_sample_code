@@ -6,11 +6,12 @@ class Sample:
         print("type:", type)
         print("value:", value)
         print("trace:", trace)
-        
+
     def do_something(self):
-        #bar = 1/0
-        bar = 1/5
+        # bar = 1/0
+        bar = 1 / 5
         return bar + 10
+
 
 with Sample() as sample:
     sample.do_something()

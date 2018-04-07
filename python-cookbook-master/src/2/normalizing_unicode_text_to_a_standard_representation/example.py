@@ -2,6 +2,8 @@
 #
 # Example of unicode normalization
 
+import unicodedata
+
 # Two strings
 s1 = 'Spicy Jalape\u00f1o'
 s2 = 'Spicy Jalapen\u0303o'
@@ -15,7 +17,6 @@ print('s1 == s2', s1 == s2)
 print(len(s1), len(s2))
 
 # (c) Normalize and try the same experiment
-import unicodedata
 
 n_s1 = unicodedata.normalize('NFC', s1)
 n_s2 = unicodedata.normalize('NFC', s2)
