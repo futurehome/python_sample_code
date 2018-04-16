@@ -1,5 +1,6 @@
 # Example of delegating iteration to an internal container
 
+
 class Node:
     def __init__(self, value):
         self._value = value
@@ -13,6 +14,7 @@ class Node:
 
     def __iter__(self):
         return iter(self._children)
+
 
 # Example
 if __name__ == '__main__':

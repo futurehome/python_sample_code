@@ -2,6 +2,7 @@
 #
 # Example of depth-first search using a generator
 
+
 class Node:
     def __init__(self, value):
         self._value = value
@@ -20,6 +21,7 @@ class Node:
         yield self
         for c in self:
             yield from c.depth_first()
+
 
 # Example
 if __name__ == '__main__':
