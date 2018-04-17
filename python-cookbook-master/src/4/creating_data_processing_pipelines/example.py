@@ -1,8 +1,9 @@
-import os
+import bz2
 import fnmatch
 import gzip
-import bz2
+import os
 import re
+
 
 def gen_find(filepat, top):
     '''
@@ -12,10 +13,11 @@ def gen_find(filepat, top):
         for name in fnmatch.filter(filelist, filepat):
             yield os.path.join(path, name)
 
+
 def gen_opener(filenames):
     '''
     Open a sequence of filenames one at a time producing a file object.
-    The file is closed immediately when proceeding to the next iteration. 
+    The file is closed immediately when proceeding to the next iteration.
     '''
     for filename in filenames:
         if filename.endswith('.gz'):
@@ -27,12 +29,14 @@ def gen_opener(filenames):
         yield f
         f.close()
 
+
 def gen_concatenate(iterators):
     '''
     Chain a sequence of iterators together into a single sequence.
     '''
     for it in iterators:
         yield from it
+
 
 def gen_grep(pattern, lines):
     '''
@@ -43,10 +47,13 @@ def gen_grep(pattern, lines):
         if pat.search(line):
             yield line
 
+
 if __name__ == '__main__':
 
     # Example 1
-    lognames = gen_find('access-log*', 'www')
+    lognames = gen_find(
+        'access-log*',
+        'python-cookbook-master/src/4/creating_data_processing_pipelines/www/foo')
     files = gen_opener(lognames)
     lines = gen_concatenate(files)
     pylines = gen_grep('(?i)python', lines)
@@ -54,10 +61,12 @@ if __name__ == '__main__':
         print(line)
 
     # Example 2
-    lognames = gen_find('access-log*', 'www')
-    files = gen_opener(lognames)
-    lines = gen_concatenate(files)
-    pylines = gen_grep('(?i)python', lines)
-    bytecolumn = (line.rsplit(None,1)[1] for line in pylines)
-    bytes = (int(x) for x in bytecolumn if x != '-')
-    print('Total', sum(bytes))
+    # lognames = gen_find(
+    #     'access-log',
+    #     'python-cookbook-master/src/4/creating_data_processing_pipelines/www')
+    # files = gen_opener(lognames)
+    # lines = gen_concatenate(files)
+    # pylines = gen_grep('(?i)python', lines)
+    # bytecolumn = (line.rsplit(None, 1)[1] for line in pylines)
+    # bytes = (int(x) for x in bytecolumn if x != '-')
+    # print('Total', sum(bytes))
